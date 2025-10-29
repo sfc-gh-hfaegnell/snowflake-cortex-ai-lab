@@ -6,9 +6,9 @@ This is the **multi-user lab version** designed for hands-on training environmen
 
 ## Lab Architecture
 
-- **Shared Database**: `CORTEX_LAB_SHARED` - accessible by all participants
+- **Shared Database**: `SNOWCAMP_DB` - accessible by all participants
 - **Individual Schemas**: Each participant creates their own schema (e.g., `USER01`, `USER02`, etc.)
-- **Shared Warehouse**: `CORTEX_LAB_WH` - used by all participants
+- **Shared Warehouse**: `SNOWCAMP_WHS` - used by all participants
 - **Shared Integrations**: Email integration shared across all users
 - **Individual Workspaces**: Each user has their own stages, tables, and Cortex services
 
@@ -20,7 +20,7 @@ This is the **multi-user lab version** designed for hands-on training environmen
 
 ### For Participants
 - Access to the shared Snowflake account
-- Assigned role: `CORTEX_LAB_USER`
+- Assigned role: `SNOWCAMP`
 - Downloaded lab repository to local machine
 
 ## Quick Start Guide
@@ -28,7 +28,7 @@ This is the **multi-user lab version** designed for hands-on training environmen
 ### Step 1: Initial Setup
 1. **Download Repository**: Download this repository to your local machine
 2. **Login to Snowflake**: Use your assigned credentials
-3. **Verify Role**: Ensure you're using the `CORTEX_LAB_USER` role
+3. **Verify Role**: Ensure you're using the `SNOWCAMP` role
 
 ### Step 2: Create Your Workspace
 1. **Run Setup Script**: Execute `setup.sql` (modify the schema name to be unique)
@@ -41,20 +41,10 @@ This is the **multi-user lab version** designed for hands-on training environmen
 3. **Create Data Tables**: Build the sales analytics dataset
 4. **Setup Cortex Services**: Configure search and analytics tools
 
-### Step 4: Deploy Your Application
-1. **Run Streamlit App**: Launch `streamlit_app.py`
+### Step 4: Configure Agent 
+1. **Configure your Agent**: Create your agent using Cortex Analyst and Cortex Search Service
 2. **Test Your Agent**: Ask questions about bikes, skis, and sales data
 3. **Explore Features**: Try both structured and unstructured data queries
-
-## Key Differences from Original Lab
-
-### Simplified Setup
-- ❌ No ACCOUNTADMIN role required
-- ❌ No Git repository cloning
-- ❌ No account-level parameter changes
-- ✅ User-created schemas for isolation
-- ✅ Manual file upload process
-- ✅ Shared infrastructure components
 
 ### Enhanced Multi-User Support
 - **Individual Workspaces**: Each user has their own schema and objects
