@@ -212,26 +212,10 @@ PUT file://semantic*.yaml @semantic_files/;
 
 ---
 
-## Part 4: Deploy Your AI Agent (15 minutes)
+## Part 4: Create your Agent in Snowsight
 
-### Step 4.1: Launch Streamlit App
+### Step 4.1: 
 
-1. **Open Terminal/Command Prompt**
-   - Navigate to your `multi-user-lab/` folder
-
-2. **Install Dependencies** (if needed)
-   ```bash
-   pip install streamlit snowflake-snowpark-python streamlit-extras
-   ```
-
-3. **Run the Application**
-   ```bash
-   streamlit run streamlit_app.py
-   ```
-
-4. **Access Your App**
-   - Open the URL shown in terminal (usually `http://localhost:8501`)
-   - Verify your current context is displayed in the sidebar
 
 ### Step 4.2: Test Your AI Agent
 
