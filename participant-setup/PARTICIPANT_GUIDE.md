@@ -98,12 +98,12 @@ PUT file://semantic*.yaml @semantic_files/;
 ### Step 2.1: Open the Lab Notebook
 
 1. **Launch Jupyter/Notebook Environment**
-   - Open `SETUP_TOOLS.ipynb` in your preferred environment
-   - If using Snowflake Notebooks, upload the file first
-
-2. **Run Initial Setup Cells**
-   - Execute the first few cells to import libraries
-   - Verify your current context is displayed correctly
+   - Navigate to: Projects → Notebooks
+   - Click on the dropdown next to "+Notebook"
+   - Import .ipynb file 
+   - Select SETUP_TOOLS.ipynb in the lab-materials folder
+   - Select "Run on warehouse" and "Snowflake Warehouse Runtime 2.0" and the "Snowcamp_WHS" as query warehouse. Use the system warehouse for running the notebook. 
+   - Click on Create
 
 ### Step 2.2: Process PDF Documents
 
@@ -214,22 +214,114 @@ PUT file://semantic*.yaml @semantic_files/;
 
 ## Part 4: Create your Agent in Snowsight
 
-### Step 4.1: 
+### Step 4.1: Explore Semantic Model
 
+The semantic model maps business terminology to the structured data and adds contextual meaning. It allows Cortex Analyst to generate the correct SQL for a question asked in natural language.
 
-### Step 4.2: Test Your AI Agent
+- In Snowsight, navigate to: AI&ML → Cortex Analyst
+- Click on Snowcamp_DB -> [Your Schema]
+- Select Semantic_Files stage and Click on the existing semantic.yaml
+
+### Step 4.2: Test Semantic Model
+
+Let's ask these analytical questions to test the semantic file:
+
+- What is the average revenue per transaction per sales channel?
+- What products are often bought by the same customers?
+
+Cortex Analyst and Cortex Search can be integrated for improved retrieval of values of a column without listing them all in the semantic model file: 
+- Click on DIM_ARTICLE -> Dimensions and edit ARTICLE_NAME. Here you will see that some sample values have been provided.
+- Then ask the question: 
+
+"What are the total sales for the carvers?" 
+
+Seems as it's not sure what you are talking about right? 
+
+Now let's integrate the ARTICLE_NAME dimension with the SNOWCAMP_DB.[Your Schema].ARTICLE_NAME_SEARCH Cortex Search Service we created in the Notebook: 
+- Remove the sample values provided
+- Click on + Search Service and add ARTICLE_NAME_SEARCH
+- Click on Save, also save your semantic file (top right)
+
+Now ask it again: 
+
+"What are the total sales for the carvers?" 
+
+This time Cortex Analyst gets it right? Also note that we asked for "Carvers", but the literal article name is "Carver Skis." *cool emoji with sunglasses on* 
+
+### Step 4.3: Create your first Agent 
+
+An agent is an intelligent entity within Snowflake Intelligence that acts on behalf of the user. Agents are configured with specific tools and orchestration logic to answer questions and perform tasks on top of your data.
+
+- In Snowsight, on the left hand navigation menu, select AI&ML → Agents
+- Click on Create agent → Schema: SNOWFLAKE_INTELLIGENCE.AGENTS → Create this agent for Snowflake Intelligence
+- Choose a name for agent object and for display (e.g. username)
+
+Select the agent you just created. 
+
+This is where you can edit and monitor your agent. Let's add some tools and instructions:
+
+Click on Edit in the top right corner. 
+
+**Under About Tab**
+
+Add a high-level description: 
+- Here is an example "This agent helps users explore bike and ski products, sales data, and customer analytics from structured and unstructured data."
+
+Add the following starter questions under Example questions:
+- "Show me monthly sales revenue trends by product category over the past 2 years."
+- "What is the guarantee of the premium bike?"
+- "What is the length of the carver skis?"
+- "Is there any brand in the frame of the downhill bike?"
+- "How many carvers are we selling per year in the North region?"
+
+**Add Tools**
+
+- Add Cortex Analyst: Choose Semantic model file → Database: Snowcamp_DB -> [Your Schema] → Stage: SEMANTIC_FILES
+- Click on semantic.yaml
+- Name it "Sales_Data"
+- Add a description: 
+
+"This retail sales analytics semantic model from DASH_CORTEX_AGENTS.DATA database provides comprehensive sales transaction analysis capabilities through a star schema connecting customer demographics, product catalog, and sales facts. The model enables detailed reporting on sales performance across multiple dimensions including customer segments (Premium, Regular, Occasional), product categories (Bikes, Ski Boots, Skis), sales channels (Online, In-Store, Partner), and time periods. The central FACT_SALES table captures transaction details including quantities, pricing, and promotional information, while linking to DIM_CUSTOMER for demographic analysis and DIM_ARTICLE for product performance insights. The system supports advanced product search functionality and is specifically designed to answer sales-related questions about product performance, customer behavior, and revenue analysis while excluding product specifications or usage information." 
+
+- Warehouse: User's default 
+- Query timeout: 60 (seconds)
+- Click on Add
+
+- Add Cortex Search Services: Choose Semantic model file → Database: Snowcamp_DB -> [Your Schema] → Choose: SNOWCAMP_DB.[Your Schema].DOCS
+- ID column: CHUNK_INDEX
+- Title column: RELATIVE_PATH
+- Name: Docs
+- Add a description: 
+
+"Searches through product specifications, user guides, and images for bikes and ski equipment. Use this tool when users ask about product features, technical specifications, colors, designs, or any information contained in product documentation and images."
+- Click on Add
+
+**Orchestration**
+
+- Choose the whatever model you find available
+- Add Orchestration instructions: 
+"Whenever you can answer visually with a chart, always choose to generate a chart even if the user didn't specify to." 
+- You can also add response instructions. At the end of the lab and there is time left, play around with these instructions and observe the differences. 
+
+** IMPORTANT TO HIT SAVE NOW IN THE RIGHT UPPER CORNER **
+
+## Part 5: Snowflake Intelligence
+
+Now, let's launch Snowflake Intelligence. You will find it under AI&ML → Snowflake Intelligence.  
+- Make sure you're signed into the right account. If you're not sure, click on your name in the bottom left » Sign out and sign back in. Also note that your role should be set to
 
 **Try these example queries:**
 
-**Unstructured Data Queries** (searches documents/images):
-- "What are the specifications of the Ultimate Downhill Bike?"
-- "Show me information about ski boots"
-- "What colors are available for the Premium Bicycle?"
+**Unstructured Data Queries** :
+- "What is the guarantee of the premium bike?"
+- "What is the length of the carver skis?"
+- "Is there any brand in the frame of the downhill bike?"
 
-**Structured Data Queries** (generates SQL):
-- "What are our total sales by product category?"
-- "Which customers bought the most expensive items?"
-- "Show me monthly revenue trends for the last year"
+**Structured Data Queries** :
+- "Show me monthly sales revenue trends by product category over the past 2 years."
+- "How many carvers are we selling per year in the North region?"
+- "How many infant bikes are we selling per month?"
+- "What are the top 5 customers buying the carvers?"
 
 **Mixed Queries** (uses both data types):
 - "What are the best-selling bike models and their specifications?"
@@ -241,17 +333,34 @@ PUT file://semantic*.yaml @semantic_files/;
 
 ### Advanced Features to Try
 
-1. **Custom Prompts**
-   - Modify the response instructions in `streamlit_app.py`
-   - Try different conversation styles or focus areas
+1. **Additional Custom Tool**
+   - Add the send_email store procedure as a custom tool to send summarising emails from Snowflake Intelligence. 
+   - Add Custom Tool: Choose Snowcamp_DB -> [Your Schema]
+   - Custom tool identifier: Snowcamp_DB.[Your Schema].SEND_EMAIL()
+   - Parameter: body 
+      - Description: Use HTML-Syntax for this. If the content you get is in markdown, translate it to HTML. If body is not provided, summarize the last question and use that as content for the email.
+   - Parameter: recipient_email
+      - Description: If the email is not provided, send it to YOUR_EMAIL_ADDRESS_GOES_HERE.
+   - Parameter: subject
+      - Description: If subject is not provided, use "Snowflake Intelligence".
+   - Warehouse: SNOWCAMP_WHS
+   - Query timeout: 60
 
-2. **Additional Data**
+   Obs: If there is no email in your profile, this step will not be possible. Check if there is an email attached to your profile by clicking on your profile in lower left corner -> Settings
+      - If there is an email but it says "Please verify your email address. Resend verification", click on the Resend verification.
+
+2. **Custom Prompts**
+   - Modify the response instructions in your Agent.
+   - Try different conversation styles or focus areas. 
+
+3. **Additional Data**
    - Add your own documents to the `@docs` stage
    - Create additional product categories or customer segments
 
-3. **Enhanced Analytics**
+4. **Enhanced Analytics**
    - Create new calculated fields in your semantic model
    - Add time-based filters or geographic analysis
+
 
 ### Troubleshooting Common Issues
 
@@ -268,28 +377,6 @@ PUT file://semantic*.yaml @semantic_files/;
 **Cortex functions not working**
 - Check your role has proper permissions
 - Contact instructor if persistent issues
-
-**Streamlit connection issues**
-- Ensure you're logged into Snowflake in your browser
-- Check that your session hasn't expired
-
----
-
-## Understanding What You Built
-
-### Architecture Overview
-
-```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Documents     │    │   Cortex Search  │    │   Streamlit     │
-│   (PDFs/Images) │───▶│   Service        │───▶│   Interface     │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                                                        │
-┌─────────────────┐    ┌──────────────────┐           │
-│   Sales Data    │    │   Cortex         │           │
-│   (Tables)      │───▶│   Analyst        │───────────┘
-└─────────────────┘    └──────────────────┘
-```
 
 ### Key Technologies Used
 
@@ -323,8 +410,6 @@ This architecture enables:
 
 ### Resources
 - [Snowflake Cortex AI Documentation](https://docs.snowflake.com/en/user-guide/snowflake-cortex)
-- [Streamlit Documentation](https://docs.streamlit.io/)
-- [Snowpark Python Guide](https://docs.snowflake.com/en/developer-guide/snowpark/python/index)
 
 ---
 
@@ -336,7 +421,7 @@ Your feedback helps improve this lab! Please share:
 - What would you like to see added?
 - How would you use this in your work?
 
-**Contact**: [Instructor contact information]
+**Contact**: henry.faegnell@snowflake.com & tatiana.petrache@snowflake.com
 
 ---
 
