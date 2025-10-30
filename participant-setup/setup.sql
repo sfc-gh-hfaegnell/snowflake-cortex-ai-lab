@@ -60,13 +60,23 @@ def send_email(session, recipient_email, subject, body):
         return f"Error sending email: {str(e)}"
 $$;
 
--- Verification queries
-SELECT 'Schema and initial setup completed successfully!' AS status;
-SELECT 'Next steps:' AS instruction, 
-       '1. Upload files from docs/ folder to @docs stage' AS step1,
-       '2. Upload semantic.yaml and semantic_search.yaml to @semantic_files stage' AS step2,
-       '3. Run the SETUP_TOOLS notebook' AS step3;
+/* Next Step: Upload Files 
+
+-- Method 1: Using Snowsight (Recommended)**
+
+-- **Upload Document Files**
+   - Navigate to: Data → Databases → SNOWCAMP_DB → [Your Schema] → Stages
+   - Click on the `docs` stage
+   - Click "Upload Files"
+   - Select ALL files from the `docs/` folder in your downloaded repository
+   - Wait for upload to complete
+
+2. **Upload Semantic Files**
+   - Click on the `semantic_files` stage
+   - Upload `semantic.yaml` and `semantic_search.yaml` from the repository root */
 
 -- Quick verification commands (run these after file upload)
--- SELECT * FROM DIRECTORY('@docs');
--- SELECT * FROM DIRECTORY('@semantic_files');
+SELECT * FROM DIRECTORY('@docs');
+SELECT * FROM DIRECTORY('@semantic_files');
+
+-- All good? All good!
