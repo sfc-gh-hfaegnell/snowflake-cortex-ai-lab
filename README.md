@@ -25,26 +25,24 @@ This is the **multi-user lab version** designed for hands-on training environmen
 
 ## Quick Start Guide
 
-### Step 1: Initial Setup
-1. **Download Repository**: Download this repository to your local machine
-2. **Login to Snowflake**: Use your assigned credentials
-3. **Verify Role**: Ensure you're using the `SNOWCAMP` role
+### 🏫 For Instructors
+1. **Go to** `instructor-setup/` folder
+2. **Read** `README.md` for quick overview
+3. **Follow** `INSTRUCTOR_SETUP.md` for complete setup
+4. **Create** user accounts and configure resources
 
-### Step 2: Create Your Workspace
-1. **Run Setup Script**: Execute `setup.sql` (modify the schema name to be unique)
-2. **Upload Files**: Upload files from the `docs/` folder to your `@docs` stage
-3. **Upload Semantic Files**: Upload `semantic.yaml` and `semantic_search.yaml` to your `@semantic_files` stage
+### 👥 For Participants  
+1. **Start in** `participant-setup/` folder
+2. **Read** `README.md` for quick overview
+3. **Follow** `PARTICIPANT_GUIDE.md` step-by-step
+4. **Upload files** using `FILE_UPLOAD_GUIDE.md`
+5. **Execute lab** in `lab-materials/` folder
 
-### Step 3: Build Your AI Agent
-1. **Open Notebook**: Work through `SETUP_TOOLS.ipynb`
-2. **Process Documents**: Extract information from PDFs and images
-3. **Create Data Tables**: Build the sales analytics dataset
-4. **Setup Cortex Services**: Configure search and analytics tools
-
-### Step 4: Configure Agent 
-1. **Configure your Agent**: Create your agent using Cortex Analyst and Cortex Search Service
-2. **Test Your Agent**: Ask questions about bikes, skis, and sales data
-3. **Explore Features**: Try both structured and unstructured data queries
+### 🚀 Lab Flow (Participants)
+1. **Setup** (15 min): Run `participant-setup/setup.sql` and upload files
+2. **Lab Execution** (90 min): Work through `lab-materials/SETUP_TOOLS.ipynb`
+3. **Deployment** (15 min): Launch `lab-materials/streamlit_app.py`
+4. **Testing** (10 min): Ask questions and explore your AI agent
 
 ### Enhanced Multi-User Support
 - **Individual Workspaces**: Each user has their own schema and objects
@@ -57,19 +55,29 @@ This is the **multi-user lab version** designed for hands-on training environmen
 ```
 multi-user-lab/
 ├── README.md                    # This file - main lab overview
-├── INSTRUCTOR_SETUP.md          # Pre-lab setup for instructors
-├── PARTICIPANT_GUIDE.md         # Detailed step-by-step instructions
-├── FILE_UPLOAD_GUIDE.md         # File upload instructions
-├── setup.sql                    # User workspace setup script
-├── SETUP_TOOLS.ipynb            # Main lab notebook
-├── streamlit_app.py             # AI agent application
-├── semantic.yaml                # Data model definition
-├── semantic_search.yaml         # Enhanced semantic model with search
-├── environment.yml              # Python dependencies
 ├── LICENSE                      # License file
-└── docs/                        # Sample documents and images
-    ├── *.pdf                    # Product specification documents
-    └── *.jpeg                   # Product images
+├── instructor-setup/            # 🏫 For instructors only
+│   ├── README.md               # Instructor quick start guide
+│   └── INSTRUCTOR_SETUP.md     # Complete pre-lab setup instructions
+├── participant-setup/          # 👥 Start here as a participant
+│   ├── README.md               # Participant quick start guide
+│   ├── PARTICIPANT_GUIDE.md    # Step-by-step lab instructions
+│   ├── FILE_UPLOAD_GUIDE.md    # Detailed file upload help
+│   └── setup.sql               # Your workspace setup script
+├── lab-materials/              # 🧪 Lab execution files
+│   ├── README.md               # Lab materials overview
+│   ├── SETUP_TOOLS.ipynb       # Main lab notebook
+│   └── streamlit_app.py        # AI agent application
+├── config/                     # ⚙️ Configuration files
+│   ├── README.md               # Configuration guide
+│   ├── semantic.yaml           # Data model definition
+│   ├── semantic_search.yaml    # Enhanced semantic model
+│   └── environment.yml         # Python dependencies
+└── sample-data/                # 📊 Sample documents and images
+    ├── README.md               # Sample data overview
+    └── docs/                   # Product catalogs (22 files)
+        ├── *.pdf               # Product specifications
+        └── *.jpeg              # Product images
 ```
 
 ## Learning Objectives
