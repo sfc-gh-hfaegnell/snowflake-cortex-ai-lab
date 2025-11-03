@@ -26,7 +26,7 @@ CREATE OR REPLACE STAGE semantic_files
   ENCRYPTION = (TYPE = 'SNOWFLAKE_SSE') 
   DIRECTORY = (ENABLE = true);
 
--- Step 5: Create your email procedure (uses shared integration)
+-- (Optional) Step 5: Create your email procedure (uses shared integration)
 CREATE OR REPLACE PROCEDURE send_email(
     recipient_email VARCHAR,
     subject VARCHAR,
