@@ -17,7 +17,7 @@ By the end of this lab, you'll have:
 1. **Document Processing Pipeline** - Extract insights from PDFs and images
 2. **Sales Analytics Dataset** - Structured data for business intelligence
 3. **AI-Powered Search** - Semantic search across all your data
-4. **Conversational Interface** - Streamlit app for natural language queries
+4. **Conversational Interface** - Deploy your Agent in Snowflake Intelligence for natural language questions
 
 ---
 
@@ -34,9 +34,9 @@ By the end of this lab, you'll have:
    ```sql
    SELECT CURRENT_ROLE(), CURRENT_DATABASE(), CURRENT_WAREHOUSE();
    ```
-   - You should see `CORTEX_LAB_USER` as your role
-   - Database should be `CORTEX_LAB_SHARED`
-   - Warehouse should be `CORTEX_LAB_WH`
+   - You should see `SNOWCAMP` as your role
+   - Database should be `SNOWCAMP_DB`
+   - Warehouse should be `SNOWCAMP_WHS`
 
 ### Step 1.2: Create Your Workspace
 
@@ -70,7 +70,7 @@ By the end of this lab, you'll have:
 
 2. **Upload Semantic Files**
    - Click on the `semantic_files` stage
-   - Upload `semantic.yaml` and `semantic_search.yaml` from the repository root
+   - Upload `semantic.yaml` from the config folder
 
 **Method 2: Using SnowSQL (Alternative)**
 
@@ -147,7 +147,7 @@ PUT file://semantic*.yaml @semantic_files/;
    CREATE OR REPLACE CORTEX SEARCH SERVICE DOCS
    ON chunk
    ATTRIBUTES relative_path, category
-   WAREHOUSE = CORTEX_LAB_WH
+   WAREHOUSE = SNOWCAMP_WHS
    TARGET_LAG = '1 hour'
    EMBEDDING_MODEL = 'snowflake-arctic-embed-l-v2.0'
    AS (
