@@ -9,7 +9,7 @@ This comprehensive guide will walk you through building an intelligent AI agent 
 ### Prerequisites Checklist
 - [ ] Received lab credentials (username, password, account URL)
 - [ ] Downloaded the lab repository to your local machine
-- [ ] Can access Snowflake with your assigned `CORTEX_LAB_USER` role
+- [ ] Can access Snowflake with your assigned `SNOWCAMP` role
 - [ ] Have a text editor or IDE for viewing/editing files
 
 ### What You'll Build
