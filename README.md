@@ -41,14 +41,13 @@ This is the **multi-user lab version** designed for hands-on training environmen
 ### 🚀 Lab Flow (Participants)
 1. **Setup** (15 min): Run `participant-setup/setup.sql` and upload files
 2. **Lab Execution** (90 min): Work through `lab-materials/SETUP_TOOLS.ipynb`
-3. **Deployment** (15 min): Launch `lab-materials/streamlit_app.py`
+3. **Deployment** (15 min): Launch in Snowflake Intelligence
 4. **Testing** (10 min): Ask questions and explore your AI agent
 
 ### Enhanced Multi-User Support
 - **Individual Workspaces**: Each user has their own schema and objects
 - **Shared Resources**: Common warehouse and integrations for cost efficiency
 - **Dynamic Configuration**: Semantic models adapt to current user context
-- **Context Awareness**: Streamlit app shows current user's database/schema/role
 
 ## File Structure
 
@@ -66,8 +65,7 @@ multi-user-lab/
 │   └── setup.sql               # Your workspace setup script
 ├── lab-materials/              # 🧪 Lab execution files
 │   ├── README.md               # Lab materials overview
-│   ├── SETUP_TOOLS.ipynb       # Main lab notebook
-│   └── streamlit_app.py        # AI agent application
+│   └── SETUP_TOOLS.ipynb       # Main lab notebook
 ├── config/                     # ⚙️ Configuration files
 │   ├── README.md               # Configuration guide
 │   ├── semantic.yaml           # Data model definition
@@ -87,7 +85,7 @@ By the end of this lab, you will have:
 1. **Built a Multi-Modal AI Agent** that can reason over both structured and unstructured data
 2. **Implemented Cortex Search** for document and image processing
 3. **Created Cortex Analyst** for natural language SQL generation
-4. **Deployed a Streamlit Application** with conversational AI interface
+4. **Deployed a Cortex Agents** with conversational AI interface in Snowflake Intelligence
 5. **Understood Multi-Tenant Architecture** in Snowflake environments
 
 ## Troubleshooting
@@ -129,7 +127,7 @@ After completing this lab:
 ## Resources
 
 - [Snowflake Cortex AI Documentation](https://docs.snowflake.com/en/user-guide/snowflake-cortex)
-- [Streamlit Documentation](https://docs.streamlit.io/)
+- [Snowflake Intelligence Documentation](https://docs.snowflake.com/en/user-guide/snowflake-cortex/snowflake-intelligence)
 - [Original Lab Repository](https://github.com/Snowflake-Labs/sfguide-build-data-agents-using-snowflake-cortex-ai)
 
 ---
