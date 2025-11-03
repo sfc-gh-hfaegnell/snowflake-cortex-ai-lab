@@ -73,7 +73,7 @@ $$;
 
 2. **Upload Semantic Files**
    - Click on the `semantic_files` stage
-   - Upload `semantic.yaml` and `semantic_search.yaml` from the repository root */
+   - Upload `semantic.yaml` from the repository root */
 
 -- Quick verification commands (run these after file upload)
 SELECT * FROM DIRECTORY('@docs');
