@@ -1,8 +1,8 @@
-# Building Agentic AI Applications In Snowflake - Multi-User Lab
+# Building Agentic AI Applications In Snowflake - Snowflake Intelligence
 
 ## Overview
 
-This is the **multi-user lab version** designed for hands-on training environments where multiple participants share a sandbox Snowflake account. Each participant works in their own isolated schema while sharing common resources like warehouses and integrations.
+This hands-on lab guides participants through building an intelligent AI agent that combines document search with business analytics using Snowflake Cortex AI. In 90 minutes, you'll create a conversational interface that can answer questions about both product specifications (from PDFs/images) and sales performance (from structured data).
 
 ## Lab Architecture
 
